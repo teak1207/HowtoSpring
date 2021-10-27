@@ -1,14 +1,23 @@
 package com.springbook.biz.common;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Service;
 
 import com.springbook.biz.user.UserVO;
 
+@Service
+@Aspect
 public class AfterReturningAdvice {
+
+
+
 	/*
 	 * returnObj를 '바인드 변수'라고 한다. 바인드 변수는 비즈니스 메소드가 리턴한 결과값을 바인딩할 목적으로 사용하며, 어떤 값이
 	 * 리턴될지 모르기 때문에 Object 타입으로 선언한다.
 	 */
+	@AfterReturning(pointcut="PointcutCommon.getPointcut()", returning="returnObj")
 	public void AfterLog(JoinPoint jp, Object returnObj) {
 
 		String method = jp.getSignature().getName();
